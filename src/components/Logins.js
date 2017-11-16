@@ -8,7 +8,7 @@ export default class Logins extends React.Component {
     return (
       <div className="Logins">
         {
-          this.props.logins.map((login) => (
+          this.props.logins && this.props.logins.map((login) => (
             <Login
               key={login.username + login.password}
               login={login}

@@ -1,3 +1,4 @@
+import config from './configuration'
 import React from 'react'
 import Logins from './Logins'
 import Actions from './Actions'
@@ -8,7 +9,7 @@ import EditModal from './EditModal'
 export default class LoginManager extends React.Component {
   state = {
     editingLogin: undefined,
-    logins: [
+    logins: undefined /* [
       {
         username: 'chloe',
         password: 'hellagood'
@@ -16,17 +17,49 @@ export default class LoginManager extends React.Component {
         username: 'max',
         password: 'areyoucereal'
       }
-    ]
+    ] */
+  }
+
+  _saveState(key, data) {
+    console.info('saving data...')
+    window.localStorage.setItem(key, data)
+  }
+
+  componentWillMount() {
+    let json
+    const data = window.localStorage.getItem(config.storageKeys.data)
+
+    if (!data) return
+
+    try {
+      json = JSON.parse(data)
+    } catch (error) {
+      console.error('Login Manager could not load data from window.localStorage.')
+    }
+
+    if (!json.logins) return
+
+    this.setState(() => ({
+      logins: json.logins
+    }))
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const data = JSON.stringify(this.state)
+
+    if (JSON.stringify(prevState) === data) return
+
+    this._saveState(config.storageKeys.data, data)
   }
 
   render() {
     return (
       <div className="LoginManager">
-        <Logins 
-          logins={this.state.logins} 
+        <Logins
+          logins={this.state.logins}
           handleEdit={this.handleEdit} />
         <Actions />
-        <EditModal 
+        <EditModal
           editingLogin={this.state.editingLogin}
           handleCloseModal={this.handleCloseModal}
         />
