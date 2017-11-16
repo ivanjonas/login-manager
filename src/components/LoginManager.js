@@ -58,13 +58,22 @@ export default class LoginManager extends React.Component {
         <Logins
           logins={this.state.logins}
           handleEdit={this.handleEdit} />
-        <Actions />
+        <Actions
+          createLogin={this.createLogin}
+        />
         <EditModal
           editingLogin={this.state.editingLogin}
           handleCloseModal={this.handleCloseModal}
         />
       </div>
     )
+  }
+
+  createLogin = (username, password) => {
+    console.log("we're saving a new Login!")
+    this.setState((prevState) => ({
+      logins: prevState.logins.concat({username, password})
+    }))
   }
 
   handleEdit = (login) => {
