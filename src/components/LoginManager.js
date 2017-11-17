@@ -2,13 +2,11 @@ import config from './configuration'
 import React from 'react'
 import Logins from './Logins'
 import Actions from './Actions'
-import EditModal from './EditModal'
 
 // Represents the entire LoginManager application
 
 export default class LoginManager extends React.Component {
   state = {
-    editingLogin: undefined,
     logins: undefined /* [
       {
         username: 'chloe',
@@ -21,7 +19,6 @@ export default class LoginManager extends React.Component {
   }
 
   _saveState(key, data) {
-    console.info('saving data...')
     window.localStorage.setItem(key, data)
   }
 
@@ -57,38 +54,40 @@ export default class LoginManager extends React.Component {
       <div className="LoginManager">
         <Logins
           logins={this.state.logins}
-          handleEdit={this.handleEdit} />
+          handleEditLogin={this.handleEditLogin} />
         <Actions
           createLogin={this.createLogin}
-        />
-        <EditModal
-          editingLogin={this.state.editingLogin}
-          handleCloseModal={this.handleCloseModal}
         />
       </div>
     )
   }
 
   createLogin = (username, password) => {
-    console.log("we're saving a new Login!")
     this.setState((prevState) => ({
-      logins: prevState.logins.concat({username, password})
+      logins: prevState.logins.concat({ username, password })
     }))
   }
 
-  handleEdit = (login) => {
-    // edit the logins in state
-    this.setState(() => ({
-      editingLogin: login
-    }))
-    return false
-  }
+  handleEditLogin = (editedLogin) => {
+    const matchedLogins = this.state.logins.filter((existingLogin) => (
+      existingLogin.username === editedLogin.oldUsername
+      && existingLogin.password === editedLogin.oldPassword
+    ))
 
-  handleCloseModal = () => {
-    // close the modal
-    this.setState(() => ({
-      editingLogin: undefined
+    if (matchedLogins.length !== 1) {
+      console.warn('There was an error identifying the Login that needs to be edited.')
+      return false
+    }
+    
+    delete editedLogin.oldUsername
+    delete editedLogin.oldPassword
+
+    this.setState((prevState) => ({
+      logins: prevState.logins.map((login) =>
+        login === matchedLogins[0] ? editedLogin : login
+      )
     }))
-    return false
+
+    return true
   }
 }

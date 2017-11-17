@@ -11,7 +11,7 @@ export default class Login extends React.Component {
         >
           {this.props.login.username}
         </span>
-        <button onClick={(e) => this.props.handleEdit(this.props.login)}>Edit</button>
+        <button onClick={(e) => {this.props.handleEdit(this.props.login)}}>Edit</button>
       </div>
     )
   }
