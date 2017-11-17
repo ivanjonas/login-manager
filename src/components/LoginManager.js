@@ -18,10 +18,6 @@ export default class LoginManager extends React.Component {
     ] */
   }
 
-  _saveState(key, data) {
-    window.localStorage.setItem(key, data)
-  }
-
   componentWillMount() {
     let json
     const data = window.localStorage.getItem(config.storageKeys.data)
@@ -54,7 +50,7 @@ export default class LoginManager extends React.Component {
       <div className="LoginManager">
         <Logins
           logins={this.state.logins}
-          handleEditLogin={this.handleEditLogin} 
+          handleEditLogin={this.handleEditLogin}
           handleDelete={this.handleDeleteLogin}
         />
         <Actions
@@ -65,40 +61,74 @@ export default class LoginManager extends React.Component {
   }
 
   createLogin = (username, password) => {
+    const matchedLogin = this._findLogin({ username, password })
+
+    if (matchedLogin) {
+      return false
+    }
+
     this.setState((prevState) => ({
       logins: prevState.logins.concat({ username, password })
     }))
+    return true
   }
 
   handleDeleteLogin = (loginToDelete) => {
     this.setState((prevState) => ({
-      logins: prevState.logins.filter((login) => 
-        !(loginToDelete.username === login.username ||
-        loginToDelete.password === login.password)
+      logins: prevState.logins.filter((login) =>
+        !(loginToDelete.username === login.username &&
+          loginToDelete.password === login.password)
       )
     }))
   }
 
   handleEditLogin = (editedLogin) => {
-    const matchedLogins = this.state.logins.filter((existingLogin) => (
-      existingLogin.username === editedLogin.oldUsername &&
-      existingLogin.password === editedLogin.oldPassword
-    ))
+    /// before calling this function, ensure that the editedLogin really is edited.
+    // at this point the editedLogin shouldn't match any existing persisted Logins
 
-    if (matchedLogins.length !== 1) {
-      console.warn('There was an error identifying the Login that needs to be edited.')
+    // although we're "editing," this object will completely replace the old one.
+    const replacementLogin = {
+      username: editedLogin.newUsername,
+      password: editedLogin.newPassword
+    }
+    const matchedLogin = this._findLogin(replacementLogin)
+
+    if (matchedLogin) {
       return false
     }
-    
-    delete editedLogin.oldUsername
-    delete editedLogin.oldPassword
 
     this.setState((prevState) => ({
-      logins: prevState.logins.map((login) =>
-        login === matchedLogins[0] ? editedLogin : login
-      )
+      logins: prevState.logins.map((login) => {
+        if ((login.username === editedLogin.username)
+          && login.password === editedLogin.password) {
+            return replacementLogin
+        } else {
+          return login
+        }
+      })
     }))
 
     return true
+  }
+
+  _saveState(key, data) {
+    window.localStorage.setItem(key, data)
+  }
+
+  _findLogin = (loginToFind) => {
+    /// Find a persisted Login that matches the data in the given object
+    /// Returns the object if one is found, or undefined otherwise.
+    /// (Should never occur that there is more than one match, but return undefined and logs a warning if the impossible occurs.)
+
+    const matchedLogins = this.state.logins.filter((existingLogin) => (
+      existingLogin.username === loginToFind.username &&
+      existingLogin.password === loginToFind.password
+    ))
+
+    if (matchedLogins.length > 1) {
+      console.warn('There was an error identifying the Login that needs to be edited.')
+    }
+
+    return matchedLogins.length === 1 ? matchedLogins[0] : undefined
   }
 }

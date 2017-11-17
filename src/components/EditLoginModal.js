@@ -14,9 +14,10 @@ const EditLoginModal = (props) => {
     >
       <h3 className="Modal-title">{title}</h3>
       <form onSubmit={props.handleSubmitEdit}>
-        <input type="text" name="username" defaultValue={props.editingLogin.username}/>
-        <input type="password" name="password" defaultValue={props.editingLogin.password}/>
+        <input type="text" name="newUsername" defaultValue={props.editingLogin.username}/>
+        <input type="password" name="newPassword" defaultValue={props.editingLogin.password}/>
         <input type="submit" value="Confirm"/>
+        {props.editLoginModalErrorMessage && <p>{props.editLoginModalErrorMessage}</p>}
       </form>
 
       <button className='Button' onClick={props.handleCloseModal}>Cancel</button>

@@ -6,7 +6,8 @@ import EditLoginModal from './EditLoginModal'
 
 export default class Logins extends React.Component {
   state = {
-    editingLogin: undefined
+    editingLogin: undefined,
+    editLoginModalErrorMessage: undefined
   }
 
   render() {
@@ -26,6 +27,7 @@ export default class Logins extends React.Component {
           editingLogin={this.state.editingLogin}
           handleSubmitEdit={this.handleSubmitEdit}
           handleCloseModal={this.handleClearEditingLogin}
+          editLoginModalErrorMessage={this.state.editLoginModalErrorMessage}
         />
       </div>
     )
@@ -34,7 +36,8 @@ export default class Logins extends React.Component {
   handleClearEditingLogin = () => {
     // close the modal
     this.setState(() => ({
-      editingLogin: undefined
+      editingLogin: undefined,
+      editLoginModalErrorMessage: undefined
     }))
     return false
   }
@@ -44,10 +47,7 @@ export default class Logins extends React.Component {
     // save the old data so that the login can be found again
 
     this.setState(() => ({
-      editingLogin: Object.assign({}, login, {
-        oldUsername: login.username,
-        oldPassword: login.password
-      })
+      editingLogin: login
     }))
 
     return false
@@ -57,19 +57,36 @@ export default class Logins extends React.Component {
     /// call the parent's function to actually save the edit
     e.preventDefault()
 
-    const username = e.target.elements.username.value.trim()
-    const password = e.target.elements.password.value.trim()
+    const newUsername = e.target.elements.newUsername.value.trim()
+    const newPassword = e.target.elements.newPassword.value.trim()
+
+    if ((newUsername === this.state.editingLogin.username)
+      && newPassword === this.state.editingLogin.password) {
+      // didn't change at all.
+      this.setState(() => ({
+        editLoginModalErrorMessage: 'The Login did not change at all!'
+      }))
+      return false
+    }
 
     const newLogin = Object.assign(
-      {},
-      this.state.editingLogin,
-      { username, password }
+      { newUsername, newPassword },
+      this.state.editingLogin
     )
 
-    this.props.handleEditLogin(newLogin)
-    this.setState(() => ({
-      editingLogin: undefined
-    }))
+    const success = this.props.handleEditLogin(newLogin)
+
+    if (success) {
+      this.setState(() => ({
+        editingLogin: undefined,
+        editLoginModalErrorMessage: undefined
+      }))
+    } else {
+      // show an error message to the user
+      this.setState(() => ({
+        editLoginModalErrorMessage: 'The Login above already exists.'
+      }))
+    }
 
     return false
   }

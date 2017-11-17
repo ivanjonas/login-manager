@@ -3,14 +3,28 @@ import CreateLoginModal from './CreateLoginModal'
 
 export default class Actions extends React.Component {
   state = {
-    isCreateLoginModalOpen: false
+    isCreateLoginModalOpen: false,
+    createLoginModalErrorMessage: undefined
   }
 
   handleCreateLogin = (e) => {
     e.preventDefault()
     const username = e.target.elements.username.value.trim()
     const password = e.target.elements.password.value.trim()
-    this.props.createLogin(username, password)
+    const success = this.props.createLogin(username, password)
+
+    if (success) {
+      this.setState(() => ({
+        isCreateLoginModalOpen: false,
+        createLoginModalErrorMessage: undefined
+      }))
+    } else {
+      // show an error message to the user
+      this.setState(() => ({
+        createLoginModalErrorMessage: 'The Login you are trying to create already exists.'
+      }))
+    }
+
     return false
   }
 
@@ -23,6 +37,7 @@ export default class Actions extends React.Component {
         <CreateLoginModal 
           handleCreateLogin={this.handleCreateLogin}
           isOpen={this.state.isCreateLoginModalOpen}
+          createLoginModalErrorMessage={this.state.createLoginModalErrorMessage}
         />
       </div>
     )
