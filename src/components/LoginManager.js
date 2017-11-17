@@ -54,7 +54,9 @@ export default class LoginManager extends React.Component {
       <div className="LoginManager">
         <Logins
           logins={this.state.logins}
-          handleEditLogin={this.handleEditLogin} />
+          handleEditLogin={this.handleEditLogin} 
+          handleDelete={this.handleDeleteLogin}
+        />
         <Actions
           createLogin={this.createLogin}
         />
@@ -68,10 +70,19 @@ export default class LoginManager extends React.Component {
     }))
   }
 
+  handleDeleteLogin = (loginToDelete) => {
+    this.setState((prevState) => ({
+      logins: prevState.logins.filter((login) => 
+        !(loginToDelete.username === login.username ||
+        loginToDelete.password === login.password)
+      )
+    }))
+  }
+
   handleEditLogin = (editedLogin) => {
     const matchedLogins = this.state.logins.filter((existingLogin) => (
-      existingLogin.username === editedLogin.oldUsername
-      && existingLogin.password === editedLogin.oldPassword
+      existingLogin.username === editedLogin.oldUsername &&
+      existingLogin.password === editedLogin.oldPassword
     ))
 
     if (matchedLogins.length !== 1) {

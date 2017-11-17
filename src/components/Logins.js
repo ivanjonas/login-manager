@@ -18,6 +18,7 @@ export default class Logins extends React.Component {
               key={login.username + login.password}
               login={login}
               handleEdit={this.handleBeginEdit}
+              handleDelete={this.props.handleDelete}
             />
           ))
         }
