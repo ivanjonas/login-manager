@@ -22,25 +22,21 @@ export default class LoginManager extends React.Component {
     let json
     const data = window.localStorage.getItem(config.storageKeys.data)
 
-    if (!data) return
-
     try {
-      json = JSON.parse(data)
+      json = data ? JSON.parse(data) : []
     } catch (error) {
       console.error('Login Manager could not load data from window.localStorage.')
     }
 
-    if (!json.logins) return
-
     this.setState(() => ({
-      logins: json.logins
+      logins: json
     }))
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const data = JSON.stringify(this.state)
+    const data = JSON.stringify(this.state.logins)
 
-    if (JSON.stringify(prevState) === data) return
+    if (JSON.stringify(prevState.logins) === data) return
 
     this._saveState(config.storageKeys.data, data)
   }
