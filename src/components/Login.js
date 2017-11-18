@@ -5,14 +5,35 @@ import React from 'react'
 export default class Login extends React.Component {
   render() {
     return (
-      <div className="Login">
+      <div
+        className="Login"
+        onMouseOver={(e) => {
+          (e.target === e.currentTarget) && e.target.classList.add('Login--hovered')
+        }}
+        onMouseOut={(e) => { e.currentTarget.classList.remove('Login--hovered') }}
+      >
         <span
+          className="Login-username"
           title={this.props.login.password}
         >
           {this.props.login.username}
         </span>
-        <button onClick={(e) => {this.props.handleEdit(this.props.login)}}>Edit</button>
-        <button onClick={(e) => {this.props.handleDelete(this.props.login)}}>Delete</button>
+        <div className="Login-buttons">
+          <button
+            className="Button Login-button Login-edit"
+            onClick={(e) => { this.props.handleEdit(this.props.login) }}
+            title="Edit"
+          >
+            <i className="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+          <button
+            className="Button Button--red Login-button Login-delete"
+            onClick={(e) => { this.props.handleDelete(this.props.login) }}
+            title="Delete"
+          >
+            <i className="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
     )
   }

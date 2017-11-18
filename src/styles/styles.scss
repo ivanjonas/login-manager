@@ -1,2 +1,10 @@
 @import './base/settings';
 @import './base/base';
+
+// CSS components
+@import './components/Button';
+
+// React components
+@import './components/Actions.scss';
+@import './components/LoginManager';
+@import './components/Login';

@@ -1,7 +1,21 @@
 // Colors
-// Spacing
-$s-size: 1.2rem;
-$m-size: 1.6rem;
-$l-size: 3.2rem;
-$xl-size: 4.8rem;
-$desktop-breakpoint: 45rem;
+$color-primary-100:   rgba(227, 231, 250, 1);
+$color-primary-300:   rgba(179, 187, 226, 1);
+$color-primary-500:   rgba( 99, 109, 163, 1);
+$color-primary-700:   rgba( 50,  60, 114, 1);
+$color-primary-900:   rgba( 17,  23,  58, 1);
+
+$color-secondary: rgba( 52, 135,  33, 1);
+$color-secondary-100: lighten($color-secondary, 60%);
+$color-secondary-300: lighten($color-secondary, 25%);
+$color-secondary-500: lighten($color-secondary, 10%);
+$color-secondary-700: $color-secondary;
+$color-secondary-900: darken($color-secondary, 10%);
+
+$color-tertiary-100:  rgba(253, 227, 236, 1);
+$color-tertiary-300:  rgba(238, 172, 195, 1);
+$color-tertiary-500:  rgba(209, 115, 148, 1);
+$color-tertiary-700:  rgba(145,  52,  85, 1);
+$color-tertiary-900:  rgba( 74,  14,  35, 1);
+
+$color-white: #ffffff;

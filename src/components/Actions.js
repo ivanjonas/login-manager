@@ -31,9 +31,15 @@ export default class Actions extends React.Component {
   render() {
     return (
       <div className="Actions">
-        <button onClick={(e) => {
-          this.setState(() => ({ isCreateLoginModalOpen: true }))
-        }}>Create New Login</button>
+        <button
+          className="Actions-add Button Button--green"
+          title="Add a Login"
+          onClick={(e) => {
+            this.setState(() => ({ isCreateLoginModalOpen: true }))
+          }}
+        >
+          <i className="fa fa-plus" aria-hidden="true"></i> Add a Login
+        </button>
         <CreateLoginModal 
           handleCreateLogin={this.handleCreateLogin}
           isOpen={this.state.isCreateLoginModalOpen}

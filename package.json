@@ -1,6 +1,6 @@
 {
   "name": "login-manager",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "main": "index.js",
   "author": "Ivan Jonas Gomes",
   "license": "MIT",

@@ -1,0 +1,32 @@
+.Button {
+    color: $color-primary-900;
+    border: 3px solid $color-primary-500;
+    background-color: $color-white;
+    border-radius: 3px;
+
+    &:hover {
+        background-color: $color-primary-100;
+    }
+
+    &--big {
+        font-size: 1.4em;
+    }
+
+    &--green {
+        color: $color-secondary-900;
+        border-color: $color-secondary-700;
+
+        &:hover {
+            background-color: $color-secondary-100;
+        }
+    }
+
+    &--red {
+        color: $color-tertiary-900;
+        border-color: $color-tertiary-700;
+
+        &:hover {
+            background-color: $color-tertiary-100;
+        }
+    }
+}
