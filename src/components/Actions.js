@@ -1,13 +1,11 @@
 import React from 'react'
-import CreateLoginButton from './CreateLoginModal'
+import CreateLogin from './CreateLogin'
 
 export default class Actions extends React.Component {
   render() {
     return (
       <div className="Actions">
-        <CreateLoginButton 
-          createLogin={this.props.createLogin}
-        />
+        <CreateLogin createLogin={this.props.createLogin}/>
       </div>
     )
   }
