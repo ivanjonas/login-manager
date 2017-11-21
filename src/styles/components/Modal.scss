@@ -1,0 +1,46 @@
+.ReactModal__Overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 40px;
+}
+
+.ReactModal__Content {
+    background: $color-white;
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+    max-width: 40em;
+    border: 2px solid $color-primary-900;
+}
+
+.Modal {
+    &-input {
+        display: block;
+        font-weight: bold;
+        padding: .5em 1em;
+        margin-bottom: .5em;
+        background-color: $color-primary-100;
+        color: $color-primary-700;
+        border: none;
+        border-bottom: 3px solid $color-primary-700;
+        outline: none; // todo: make usable focus/active styles
+
+        &--large {
+            font-size: 1.4em;
+        }
+    }
+
+    &-button {
+        display: block;
+        width: 100%;
+        outline: none; // todo: make usable focus/active styles
+    }
+}
