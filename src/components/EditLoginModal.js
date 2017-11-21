@@ -12,15 +12,15 @@ const EditLoginModal = (props) => {
       closeTimeoutMS={250}
       className="EditLoginModal"
     >
-      <h3 className="Modal-title">{title}</h3>
       <form onSubmit={props.handleSubmitEdit}>
-        <input type="text" name="newUsername" defaultValue={props.editingLogin.username}/>
-        <input type="password" name="newPassword" defaultValue={props.editingLogin.password}/>
-        <input type="submit" value="Confirm"/>
-        {props.editLoginModalErrorMessage && <p>{props.editLoginModalErrorMessage}</p>}
+        <input className="Modal-input Modal-input--large" type="text" name="newUsername" defaultValue={props.editingLogin.username}/>
+        <input className="Modal-input Modal-input--large" type="password" name="newPassword" defaultValue={props.editingLogin.password}/>
+        <button className="Modal-button Button Button--green Button--large" style={{margin: '.5em 0'}}>Confirm</button>
       </form>
 
-      <button className='Button' onClick={props.handleCloseModal}>Cancel</button>
+      <button className='Modal-button Button Button--large' onClick={props.handleCloseModal}>Cancel</button>
+
+      {props.editLoginModalErrorMessage && <p>{props.editLoginModalErrorMessage}</p>}
     </Modal>
   )
 }
