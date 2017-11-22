@@ -1,0 +1,28 @@
+.Feedback {
+    margin: 0;
+    padding: 0.5em 1.25em;
+    margin-top: .75rem;
+    font-weight: bold;
+
+    &:before {
+        font-family: FontAwesome;
+        margin-right: 0.5em;
+    }
+    
+    &--friendlyWarning {
+        background-color: rgb(244, 235, 164);
+        color: rgb(84, 69, 10);
+
+        &:before {
+            content: "\f06a";
+        }
+    }
+    &--info {
+        background-color: $color-primary-100;
+        color: $color-primary-700;
+
+        &:before {
+            content: "\f05a";
+        }
+    }
+}

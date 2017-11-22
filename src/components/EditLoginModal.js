@@ -20,7 +20,7 @@ const EditLoginModal = (props) => {
 
       <button className='Modal-button Button Button--large' onClick={props.handleCloseModal}>Cancel</button>
 
-      {props.editLoginModalErrorMessage && <p>{props.editLoginModalErrorMessage}</p>}
+      {props.editLoginModalErrorMessage && <p className="Feedback Feedback--friendlyWarning">{props.editLoginModalErrorMessage}</p>}
     </Modal>
   )
 }
