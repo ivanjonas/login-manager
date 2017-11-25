@@ -60,6 +60,13 @@ export default class Logins extends React.Component {
     const newUsername = e.target.elements.newUsername.value.trim()
     const newPassword = e.target.elements.newPassword.value.trim()
 
+    if (!newUsername || !newPassword) {
+      this.setState(() => ({
+        editLoginModalErrorMessage: 'Fields cannot be empty!'
+      }))
+      return false;
+    }
+
     if ((newUsername === this.state.editingLogin.username)
       && newPassword === this.state.editingLogin.password) {
       // didn't change at all.
