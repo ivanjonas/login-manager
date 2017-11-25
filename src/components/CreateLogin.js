@@ -18,9 +18,12 @@ export default class CreateLogin extends React.Component {
           <Modal
           isOpen={this.state.isCreateLoginModalOpen}
           contentLabel="Modal to Create a New Login"
+          onAfterOpen={() => {
+            document.querySelector('.js-createLoginModal input[name=username]').focus()
+          }}
           onRequestClose={this.handleCloseModal}
           shouldCloseOnOverlayClick={true}
-          className="CreateLoginModal"
+          className="js-createLoginModal"
         >
           <form onSubmit={this.handleCreateLogin}>
             <input className="Modal-input Modal-input--large" type="text" name="username" />
