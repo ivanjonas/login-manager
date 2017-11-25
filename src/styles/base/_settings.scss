@@ -1,21 +1,40 @@
-// Colors
-$color-primary-100:   rgba(227, 231, 250, 1);
-$color-primary-300:   rgba(179, 187, 226, 1);
-$color-primary-500:   rgba( 99, 109, 163, 1);
-$color-primary-700:   rgba( 50,  60, 114, 1);
-$color-primary-900:   rgba( 17,  23,  58, 1);
+$color-black: #050114;
+$color-background-unfocused: hsl(45%, 31%, 97%);
+$color-truewhite: #ffffff;
 
-$color-secondary: rgba( 52, 135,  33, 1);
-$color-secondary-100: lighten($color-secondary, 60%);
-$color-secondary-300: lighten($color-secondary, 25%);
-$color-secondary-500: lighten($color-secondary, 10%);
-$color-secondary-700: $color-secondary;
-$color-secondary-900: darken($color-secondary, 10%);
+$variation: 20%;
 
-$color-tertiary-100:  rgba(253, 227, 236, 1);
-$color-tertiary-300:  rgba(238, 172, 195, 1);
-$color-tertiary-500:  rgba(209, 115, 148, 1);
-$color-tertiary-700:  rgba(145,  52,  85, 1);
-$color-tertiary-900:  rgba( 74,  14,  35, 1);
+$color-red-500: hsla(5%, 82%, 49%, 1);
+$color-orange-500: hsla(32%, 82%, 49%, 1);
+$color-yellow-500: hsla(58%, 82%, 43%, 1);
+$color-green-500: hsla(153%, 84%, 38%, 1);
+$color-blue-500: hsla(194%, 57%, 37%, 1);
 
-$color-white: #ffffff;
+$color-red-100: lighten($color-red-500, $variation * 2);
+$color-red-300: lighten($color-red-500, $variation);
+$color-red-700: darken($color-red-500, $variation / 2);
+$color-red-900: darken($color-red-500, $variation);
+
+$color-orange-100: lighten($color-orange-500, $variation * 2);
+$color-orange-300: lighten($color-orange-500, $variation);
+$color-orange-700: darken($color-orange-500, $variation / 2);
+$color-orange-900: darken($color-orange-500, $variation);
+
+$color-yellow-100: lighten($color-yellow-500, $variation * 2);
+$color-yellow-300: lighten($color-yellow-500, $variation);
+$color-yellow-700: darken($color-yellow-500, $variation / 2);
+$color-yellow-900: darken($color-yellow-500, $variation);
+
+$color-green-100: lighten($color-green-500, $variation * 2);
+$color-green-300: lighten($color-green-500, $variation);
+$color-green-700: darken($color-green-500, $variation / 2);
+$color-green-900: darken($color-green-500, $variation);
+
+$color-blue-100: lighten($color-blue-500, $variation * 2);
+$color-blue-300: lighten($color-blue-500, $variation);
+$color-blue-700: darken($color-blue-500, $variation / 2);
+$color-blue-900: darken($color-blue-500, $variation);
+
+//
+
+$transition-speed: 150ms;
