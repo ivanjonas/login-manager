@@ -50,13 +50,13 @@ export default class LoginManager extends React.Component {
           handleDelete={this.handleDeleteLogin}
         />
         <Actions
-          createLogin={this.createLogin}
+          handleCreateLogin={this.handleCreateLogin}
         />
       </div>
     )
   }
 
-  createLogin = (username, password) => {
+  handleCreateLogin = (username, password) => {
     const matchedLogin = this._findLogin({ username, password })
 
     if (matchedLogin) {

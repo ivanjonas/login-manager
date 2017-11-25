@@ -37,7 +37,16 @@ export default class CreateLogin extends React.Component {
     e.preventDefault()
     const username = e.target.elements.username.value.trim()
     const password = e.target.elements.password.value.trim()
-    const success = this.props.createLogin(username, password)
+
+    if (!username || !password) {
+      this.setState(() => ({
+        createLoginModalErrorMessage: 'Fields cannot be empty!'
+      }))
+      return false
+    }
+
+
+    const success = this.props.handleCreateLogin(username, password)
 
     if (success) {
       this.setState(() => ({

@@ -5,7 +5,7 @@ export default class Actions extends React.Component {
   render() {
     return (
       <div className="Actions">
-        <CreateLogin createLogin={this.props.createLogin}/>
+        <CreateLogin handleCreateLogin={this.props.handleCreateLogin}/>
       </div>
     )
   }
