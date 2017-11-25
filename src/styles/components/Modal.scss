@@ -12,13 +12,13 @@
 }
 
 .ReactModal__Content {
-    background: $color-white;
+    background: $color-truewhite;
     overflow: auto;
     border-radius: 4px;
     outline: none;
     padding: 20px;
     width: 32em;
-    border: 2px solid $color-primary-900;
+    border: 2px solid $color-blue-900;
 }
 
 .Modal {
@@ -28,10 +28,10 @@
         font-weight: bold;
         padding: .5em 1em;
         margin-bottom: .5em;
-        background-color: $color-primary-100;
-        color: $color-primary-700;
+        background-color: $color-blue-100;
+        color: $color-blue-700;
         border: none;
-        border-bottom: 3px solid $color-primary-700;
+        border-bottom: 3px solid $color-blue-700;
         outline: none; // todo: make usable focus/active styles
 
         &--large {

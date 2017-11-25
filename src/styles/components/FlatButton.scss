@@ -1,0 +1,33 @@
+.FlatButton {
+    background-color: $color-background-unfocused;
+    color: $color-black;
+    cursor: pointer;
+    border: 2px solid transparent;
+    @include transitions(color background-color border-color);
+}
+
+.LoginManager:hover,
+.LoginManager:focus-within,
+.ReactModalPortal,
+.is-application-focused {
+    // only give the buttons a bright appearance when the LoginManager has focus or hover
+    .FlatButton {
+        background-color: $color-blue-500;
+        color: $color-truewhite;
+
+        &:hover {
+            background-color: $color-truewhite;
+            color: $color-blue-500;
+            border-color: $color-blue-500;
+        }
+
+        &--red {
+            background-color: $color-red-500;
+            &:hover {
+                background-color: $color-truewhite;
+                color: $color-red-500;
+                border-color: $color-red-500;
+            }
+        }
+    }
+}

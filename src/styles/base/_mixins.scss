@@ -1,0 +1,10 @@
+@mixin transitions($properties: (color, background-color), $easingFunction: linear) {
+    $value: ();
+    
+    @each $property in $properties {
+        
+        $value: append($value, $property $transition-speed $easingFunction, "comma");
+    }
+    
+    transition: $value;
+}

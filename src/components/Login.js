@@ -20,14 +20,14 @@ export default class Login extends React.Component {
         </span>
         <div className="Login-buttons">
           <button
-            className="Button Login-button Login-edit"
+            className="FlatButton"
             onClick={(e) => { this.props.handleEdit(this.props.login) }}
             title="Edit"
           >
             <i className="fa fa-pencil" aria-hidden="true"></i>
           </button>
           <button
-            className="Button Button--red Login-button Login-delete"
+            className="FlatButton FlatButton--red"
             onClick={(e) => { this.props.handleDelete(this.props.login) }}
             title="Delete"
           >

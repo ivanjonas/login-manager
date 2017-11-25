@@ -1,8 +1,103 @@
 .LoginManager {
-    margin: 2rem;
-    border: 2px solid $color-primary-900;
+    border: 2px solid $color-blue-900;
     border-radius: 4px;
-    background-color: $color-white;
+    background-color: $color-background-unfocused;
     display: inline-flex;
     flex-direction: column;
+    
+    &:hover,
+    &.is-application-focused {
+        background-color: $color-truewhite;
+    }
+}
+
+
+// just some extra styles that serve as scaffold {
+#app {
+    margin: 2rem;
+}
+
+.swatches {
+    display: grid;
+    grid-template: repeat(5, 100px) / repeat(5, 100px);
+}
+
+.color-red-100 {
+background-color: $color-red-100;
+}
+.color-red-300 {
+background-color: $color-red-300;
+}
+.color-red-500 {
+background-color: $color-red-500;
+}
+.color-red-700 {
+background-color: $color-red-700;
+}
+.color-red-900 {
+background-color: $color-red-900;
+}
+
+.color-orange-100 {
+background-color: $color-orange-100;
+}
+.color-orange-300 {
+background-color: $color-orange-300;
+}
+.color-orange-500 {
+background-color: $color-orange-500;
+}
+.color-orange-700 {
+background-color: $color-orange-700;
+}
+.color-orange-900 {
+background-color: $color-orange-900;
+}
+
+.color-yellow-100 {
+background-color: $color-yellow-100;
+}
+.color-yellow-300 {
+background-color: $color-yellow-300;
+}
+.color-yellow-500 {
+background-color: $color-yellow-500;
+}
+.color-yellow-700 {
+background-color: $color-yellow-700;
+}
+.color-yellow-900 {
+background-color: $color-yellow-900;
+}
+
+.color-green-100 {
+background-color: $color-green-100;
+}
+.color-green-300 {
+background-color: $color-green-300;
+}
+.color-green-500 {
+background-color: $color-green-500;
+}
+.color-green-700 {
+background-color: $color-green-700;
+}
+.color-green-900 {
+background-color: $color-green-900;
+}
+
+.color-blue-100 {
+background-color: $color-blue-100;
+}
+.color-blue-300 {
+background-color: $color-blue-300;
+}
+.color-blue-500 {
+background-color: $color-blue-500;
+}
+.color-blue-700 {
+background-color: $color-blue-700;
+}
+.color-blue-900 {
+background-color: $color-blue-900;
 }

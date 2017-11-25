@@ -1,9 +1,11 @@
 @import './base/settings';
+@import './base/mixins';
 @import './base/base';
 
 // CSS components
 @import './components/Button';
 @import './components/Feedback';
+@import './components/FlatButton';
 
 // React components
 @import './components/Actions.scss';
