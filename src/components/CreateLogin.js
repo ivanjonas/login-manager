@@ -9,15 +9,13 @@ export default class CreateLogin extends React.Component {
 
   render() {
     return (
-      <div>
-        <button
-          className="CreateLogin Button Button--green"
-          title="Add a Login"
-          onClick={this.handleOpenModal}
-        >
-          Add a Login
-        </button>
-        <Modal
+      <button
+        className="CreateLogin Button Button--green"
+        title="Add a Login"
+        onClick={this.handleOpenModal}
+      >
+        Add a Login
+          <Modal
           isOpen={this.state.isCreateLoginModalOpen}
           contentLabel="Modal to Create a New Login"
           onRequestClose={this.handleCloseModal}
@@ -31,7 +29,7 @@ export default class CreateLogin extends React.Component {
             {this.state.createLoginModalErrorMessage && <p className="Feedback Feedback--info">{this.state.createLoginModalErrorMessage}</p>}
           </form>
         </Modal>
-      </div>
+      </button>
     )
   }
 

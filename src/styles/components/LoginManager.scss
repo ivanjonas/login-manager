@@ -1,10 +1,14 @@
 .LoginManager {
-    margin: 2rem;
-    border: 2px solid $color-primary-900;
+    border: 2px solid $color-blue-900;
     border-radius: 4px;
-    background-color: $color-white;
+    background-color: $color-background-unfocused;
     display: inline-flex;
     flex-direction: column;
+    
+    &:hover,
+    &.is-application-focused {
+        background-color: $color-truewhite;
+    }
 }
 
 

@@ -1,34 +1,35 @@
 .Login {
-    padding: .25rem .25rem .25rem .75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    border-bottom: 1px solid $color-primary-900;
+    border-bottom: 2px solid $color-blue-900;
     max-width: 24em;
     min-width: 8em;
+    transition: background-color $transition-speed linear;
 
     &--hovered {
         // added via JS because we don't want to trigger this effect when children are hovered.
-        background-color: $color-primary-100;
+        background-color: $color-blue-100;
     }
 
     &-username {
-        color: $color-primary-900;
+        color: $color-blue-900;
         word-wrap: break-word; // the old spec ~10% browsers
         overflow-wrap: break-word; // the new spec ~85% browsers
         word-break: break-all; // standard value, but not ideal
         word-break: break-word; // unofficial value in webkit
         pointer-events: none;
+        padding: .25em .5em .25em .75em;
     }
 
     &-buttons {
         display: flex;
         margin-left: .25rem;
+        align-self: stretch;
     }
 
     &-button {
-        margin: .25rem;
     }
 
     &-edit {

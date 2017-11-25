@@ -10,16 +10,16 @@
     }
     
     &--friendlyWarning {
-        background-color: rgb(244, 235, 164);
-        color: rgb(84, 69, 10);
+        background-color: $color-yellow-100;
+        color: $color-yellow-900;
 
         &:before {
             content: "\f06a";
         }
     }
     &--info {
-        background-color: $color-primary-100;
-        color: $color-primary-700;
+        background-color: $color-blue-100;
+        color: $color-blue-700;
 
         &:before {
             content: "\f05a";
