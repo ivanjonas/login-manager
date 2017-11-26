@@ -26,9 +26,19 @@ export default class CreateLogin extends React.Component {
           className="js-createLoginModal"
         >
           <form onSubmit={this.handleCreateLogin}>
-            <input className="Modal-input Modal-input--large" type="text" name="username" />
-            <input className="Modal-input Modal-input--large" type="text" name="password" />
-            <input className="Modal-button Button Button--green Button--large" type="submit" value="Create" />
+            <input
+              className="Modal-input Modal-input--large"
+              type="text"
+              name="username"
+              spellcheck="false"
+            />
+            <input
+              className="Modal-input Modal-input--large"
+              type="text"
+              name="password"
+            />
+            <input
+              className="Modal-button Button Button--green Button--large" type="submit" value="Create" />
             {this.state.createLoginModalErrorMessage && <p className="Feedback Feedback--info">{this.state.createLoginModalErrorMessage}</p>}
           </form>
         </Modal>

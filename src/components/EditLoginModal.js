@@ -16,9 +16,20 @@ const EditLoginModal = (props) => {
       className="js-editLoginModal"
     >
       <form onSubmit={props.handleSubmitEdit}>
-        <input className="Modal-input Modal-input--large js-focus" type="text" name="newUsername" defaultValue={props.editingLogin.username}/>
-        <input className="Modal-input Modal-input--large" type="password" name="newPassword" defaultValue={props.editingLogin.password}/>
-        <button className="Modal-button Button Button--green Button--large" style={{margin: '.5em 0'}}>Confirm</button>
+        <input
+          className="Modal-input Modal-input--large js-focus"
+          type="text"
+          name="newUsername"
+          defaultValue={props.editingLogin.username}
+          spellcheck="false"
+        />
+        <input
+          className="Modal-input Modal-input--large"
+          type="password"
+          name="newPassword"
+          defaultValue={props.editingLogin.password}
+        />
+        <button className="Modal-button Button Button--green Button--large" style={{ margin: '.5em 0' }}>Confirm</button>
       </form>
 
       <button className='Modal-button Button Button--large' onClick={props.handleCloseModal}>Cancel</button>
