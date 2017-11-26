@@ -84,7 +84,8 @@ export default class CreateLogin extends React.Component {
 
   handleCloseModal = () => {
     this.setState(() => ({
-      isCreateLoginModalOpen: false
+      isCreateLoginModalOpen: false,
+      createLoginModalErrorMessage: undefined
     }))
   }
 }
