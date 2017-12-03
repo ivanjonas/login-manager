@@ -42,8 +42,6 @@ class DropTarget extends React.Component {
       const targetedElements = document.querySelector(`.${this.classes.isTarget}`)
       targetedElements && targetedElements.classList.remove(this.classes.isTarget)
     }
-
-    console.info(`Targeting ${newState ? 'enabled' : 'disabled'}`)
   }
 
   handleMouseover = (e) => {
@@ -74,7 +72,6 @@ class DropTarget extends React.Component {
       return
     }
 
-    console.info("The target selection handler ran.")
     e.stopImmediatePropagation()
   }
 
