@@ -7,15 +7,7 @@ import Actions from './Actions'
 
 export default class LoginManager extends React.Component {
   state = {
-    logins: undefined /* [
-      {
-        username: 'chloe',
-        password: 'hellagood'
-      }, {
-        username: 'max',
-        password: 'areyoucereal'
-      }
-    ] */
+    logins: undefined
   }
 
   componentWillMount() {
