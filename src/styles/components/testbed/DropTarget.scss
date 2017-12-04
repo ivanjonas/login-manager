@@ -1,0 +1,14 @@
+.is-targetContainer {
+    outline: 2px solid red;
+}
+
+.DropTarget-dropZone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    border: 2px dashed $color-orange-700;
+    background-color: $color-orange-100;
+    cursor: pointer;
+}
