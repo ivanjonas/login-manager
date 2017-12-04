@@ -34,7 +34,7 @@ class DropTarget extends React.Component {
   handleToggleTargeting = () => {
     var newIsTargetingEnabled = !this.state.isTargetingEnabled
 
-    this.setState((prevState) => ({
+    this.setState(() => ({
       isTargetingEnabled: newIsTargetingEnabled,
     }))
 
@@ -61,6 +61,8 @@ class DropTarget extends React.Component {
   }
 
   handleClickTarget = (e) => {
+    /// In the targeting state, buttons should not register clicks, except to cancel/complete the targeting.
+
     e.preventDefault()
 
     if (!this.state.isTargetingEnabled) {
@@ -68,8 +70,17 @@ class DropTarget extends React.Component {
     }
 
     if (e.target.classList.contains(this.classes.toggleButton)) {
-      // immediately stop propagation, unless we are trying to toggle the targeting functionality
       return
+    }
+
+    if (e.target.classList.contains(this.classes.dropZone)
+      || e.target.classList.contains(this.classes.isTargetContainer)) {
+      // Mission accomplished. Inject the Login Manager and clean up.
+      this._insertLoginManager()
+      this.setState(() => ({
+        isTargetingEnabled: false,
+      }))
+      this._unsetContainerElement()
     }
 
     e.stopImmediatePropagation()
@@ -77,7 +88,7 @@ class DropTarget extends React.Component {
 
   _insertLoginManager = () => {
     /// Do a swap of the LoginManager into the current drop zone.
-    const loginManager = document.getElementById('app')
+    const loginManager = document.getElementsByClassName('LoginManager')[0]
     const dropZone = this.state.dropZone
 
     if (!dropZone) {
@@ -91,8 +102,6 @@ class DropTarget extends React.Component {
 
     dropZone.parentElement.insertBefore(loginManager, dropZone)
     dropZone.parentElement.removeChild(dropZone)
-    
-    _removeTargetElement()
   }
 
   _isElementEligibleForDropTarget = (event) => {
@@ -130,7 +139,7 @@ class DropTarget extends React.Component {
 
   _unsetContainerElement = () => {
     this.state.targetContainer && this.state.targetContainer.classList.remove(this.classes.isTargetContainer)
-    this.state.dropZone.parentElement.removeChild(this.state.dropZone)
+    this.state.dropZone && this.state.dropZone.parentElement.removeChild(this.state.dropZone)
     this.setState(() => ({
       targetContainer: undefined,
       dropZone: undefined

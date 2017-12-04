@@ -5,7 +5,7 @@ import DropTarget from './DropTarget'
 class Testbed extends React.Component {
   colors = ['red', 'orange', 'yellow', 'green', 'blue']
 
-  generateColorDivs = function * () {
+  generateColorDivs = function* () {
     for (let i = 0; i < this.colors.length; i++) {
       for (let j = 1; j < 10; j += 2) {
         {
@@ -18,7 +18,9 @@ class Testbed extends React.Component {
 
   render() {
     return <div className="Testbed">
-      <LoginManager />
+      <div>
+        <LoginManager />
+      </div>
       <div>
         <form className="Testbed-form Testbed-form--One">
           <p>A sweet, sweet app. Holla!</p>
