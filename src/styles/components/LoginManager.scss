@@ -6,6 +6,7 @@
     flex-direction: column;
     
     &:hover,
+    &:focus-within,
     &.is-application-focused {
         background-color: $color-truewhite;
     }
