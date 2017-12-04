@@ -1,16 +1,11 @@
 import React from 'react'
+import config from '../configuration'
 
 class DropTarget extends React.Component {
   state = {
     isTargetingEnabled: false,
     targetContainer: undefined,
     dropZone: undefined
-  }
-
-  classes = {
-    isTargetContainer: 'is-targetContainer',
-    dropZone: 'DropTarget-dropZone',
-    toggleButton: 'DropTarget-toggleButton'
   }
 
   componentDidMount() {
@@ -25,7 +20,7 @@ class DropTarget extends React.Component {
     return (
       <div className="DropTarget">
         <button
-          className={this.classes.toggleButton}
+          className={config.classes.toggleButton}
           onClick={this.handleToggleTargeting}>{this.state.isTargetingEnabled ? "Disable" : "Enable"} drop target</button>
       </div>
     )
@@ -48,7 +43,7 @@ class DropTarget extends React.Component {
       return
     }
 
-    if (e.target.classList.contains(this.classes.dropZone)
+    if (e.target.classList.contains(config.classes.dropZone)
       || e.target === this.state.targetContainer) {
       // This doesn't count as a change for our purposes.
       return
@@ -69,12 +64,12 @@ class DropTarget extends React.Component {
       return
     }
 
-    if (e.target.classList.contains(this.classes.toggleButton)) {
+    if (e.target.classList.contains(config.classes.toggleButton)) {
       return
     }
 
-    if (e.target.classList.contains(this.classes.dropZone)
-      || e.target.classList.contains(this.classes.isTargetContainer)) {
+    if (e.target.classList.contains(config.classes.dropZone)
+      || e.target.classList.contains(config.classes.isTargetContainer)) {
       // Mission accomplished. Inject the Login Manager and clean up.
       this._insertLoginManager()
       this.setState(() => ({
@@ -108,7 +103,7 @@ class DropTarget extends React.Component {
     /// event: a mouseover event over the element in question
 
     if (['grid', 'inline-grid'].includes(window.getComputedStyle(event.target.parentElement).display)
-      || event.target.classList.contains(this.classes.toggleButton)) {
+      || event.target.classList.contains(config.classes.toggleButton)) {
       // avoid injecting elements inside grids. This can cause infinite feedback loops and maybe cause a seizure. Can't have that.
       return false
     }
@@ -120,12 +115,12 @@ class DropTarget extends React.Component {
 
   _setContainerElement = (el) => {
     // remove the class from the previous element and add to the next element
-    this.state.targetContainer && this.state.targetContainer.classList.remove(this.classes.isTargetContainer)
-    el.classList.add(this.classes.isTargetContainer)
+    this.state.targetContainer && this.state.targetContainer.classList.remove(config.classes.isTargetContainer)
+    el.classList.add(config.classes.isTargetContainer)
 
     const dropZone = this.state.dropZone || (() => {
       const bob = document.createElement("div")
-      bob.classList.add(this.classes.dropZone)
+      bob.classList.add(config.classes.dropZone)
       bob.textContent = "Drop Zone"
       return bob
     })()
@@ -138,7 +133,7 @@ class DropTarget extends React.Component {
   }
 
   _unsetContainerElement = () => {
-    this.state.targetContainer && this.state.targetContainer.classList.remove(this.classes.isTargetContainer)
+    this.state.targetContainer && this.state.targetContainer.classList.remove(config.classes.isTargetContainer)
     this.state.dropZone && this.state.dropZone.parentElement.removeChild(this.state.dropZone)
     this.setState(() => ({
       targetContainer: undefined,
