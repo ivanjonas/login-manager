@@ -2,10 +2,22 @@ import React from 'react'
 import LoginManager from '../LoginManager'
 import DropTarget from './DropTarget'
 
-const Testbed = (props) => {
-  const colors = ['red', 'orange', 'yellow', 'green', 'blue']
-  return (
-    <div className="Testbed">
+class Testbed extends React.Component {
+  colors = ['red', 'orange', 'yellow', 'green', 'blue']
+
+  generateColorDivs = function * () {
+    for (let i = 0; i < this.colors.length; i++) {
+      for (let j = 1; j < 10; j += 2) {
+        {
+          let cn = `color-${this.colors[i]}-${j}00`
+          yield (<div key={cn} className={cn}></div>) // parentheses only to help VS Code
+        }
+      }
+    }
+  }
+
+  render() {
+    return <div className="Testbed">
       <LoginManager />
       <div>
         <form className="Testbed-form Testbed-form--One">
@@ -26,14 +38,10 @@ const Testbed = (props) => {
         <DropTarget />
       </div>
       <div className="Testbed-swatches">
-        {colors.forEach(function (color) {
-          for (let index = 1; index < 10; index += 2) {
-            <div className="{`color-${color}-${index}`}"></div>
-          }
-        })}
+        {[...this.generateColorDivs()]}
       </div>
     </div>
-  )
+  }
 }
 
 const handleFakeLogin = (e) => {
