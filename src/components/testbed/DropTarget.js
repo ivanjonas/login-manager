@@ -37,11 +37,6 @@ class DropTarget extends React.Component {
     }))
 
     this._removeTargetElement()
-
-    if (!newState) {
-      const targetedElements = document.querySelector(`.${this.classes.isTarget}`)
-      targetedElements && targetedElements.classList.remove(this.classes.isTarget)
-    }
   }
 
   handleMouseover = (e) => {
@@ -54,7 +49,8 @@ class DropTarget extends React.Component {
       return
     }
 
-    this.state.target && this.state.target.classList.remove(this.classes.isTarget)// e.fromElement doesn't always point to the last-highlighted element
+    this._removeTargetElement()
+    // e.fromElement doesn't always point to the last-highlighted element
     if (this._isElementEligibleForDropTarget(e)) {
       this._setTargetElement(e.toElement)
     }
@@ -92,10 +88,11 @@ class DropTarget extends React.Component {
     this.setState(() => ({
       target: el
     }))
+    // el.insertAdjacentHTML('afterBegin', `<div class="${this.classes.dropZone}">Drop Zone</div>`)
   }
 
   _removeTargetElement() {
-    
+    this.state.target && this.state.target.classList.remove(this.classes.isTarget)
   }
 }
 
