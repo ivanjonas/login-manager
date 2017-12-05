@@ -5,11 +5,11 @@
     grid-template: auto auto / auto 1fr 1fr;
     grid-gap: .5em;
     padding: .5em;
-}
 
-.Testbed-form {
-    padding: 0.5em;
-    border: 1px solid black;
+    &-form {
+        padding: 0.5em;
+        border: 1px solid black;
+    }
 
     &-input,
     &-button {
