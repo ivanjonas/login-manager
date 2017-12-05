@@ -141,13 +141,14 @@ class DropTarget extends React.Component {
     this.state.targetElement && this.state.targetElement.classList.remove(config.classes.isTargetContainer)
     el.classList.add(config.classes.isTargetContainer)
 
+    const beforeElement = this.state.targetingState === config.TARGETING_STATE.before ? el : el.nextElementSibling
     const dropZone = this.state.dropZone || (() => {
       const bob = document.createElement("div")
       bob.classList.add(config.classes.dropZone)
       bob.textContent = "Drop Zone"
       return bob
     })()
-    el.parentElement.insertBefore(dropZone, el)
+    el.parentElement.insertBefore(dropZone, beforeElement)
 
     this.setState(() => ({
       targetElement: el,
