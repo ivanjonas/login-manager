@@ -127,13 +127,21 @@ class DropTarget extends React.Component {
   _isElementEligibleForDropTarget = (event) => {
     /// event: a mouseover event over the element in question
 
-    if (['grid', 'inline-grid'].includes(window.getComputedStyle(event.target.parentElement).display)
+    if (!event.target.parentElement) {
+      return false
+    }
+
+    if (this._isChildOfGrid(event.target.parentElement)
       || event.target.classList.contains(config.classes.toggleButton)) {
       // avoid injecting elements inside grids. This can cause infinite feedback loops and maybe cause a seizure. Can't have that.
       return false
     }
 
     return !event.target.closest('.LoginManager')
+  }
+
+  _isChildOfGrid(el) {
+    return event.target.parentElement && ['grid', 'inline-grid'].includes(window.getComputedStyle(event.target.parentElement).display)
   }
 
   _setContainerElement = (el) => {
