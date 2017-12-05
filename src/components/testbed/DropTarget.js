@@ -13,7 +13,7 @@ class DropTarget extends React.Component {
 
     // because the following event handler is set to trigger during the capture phase and is attached to the document root, there is basically no way that any other event could occur before it.
     document.addEventListener('click', this.handleClickTarget, true)
-    // TODO: add escape key to stop targeting
+    // TODO: add key handler to confirm/stop targeting
   }
 
   render() {
@@ -34,6 +34,7 @@ class DropTarget extends React.Component {
     }))
 
     if (!newIsTargetingEnabled) {
+      // turn off targeting
       this._unsetContainerElement()
     }
   }
@@ -51,7 +52,7 @@ class DropTarget extends React.Component {
 
     // e.fromElement doesn't always point to the last-highlighted element
     if (this._isElementEligibleForDropTarget(e)) {
-      this._setContainerElement(e.toElement)
+      this._setContainerElement(e.target)
     }
   }
 
@@ -108,9 +109,7 @@ class DropTarget extends React.Component {
       return false
     }
 
-    return !event.path.some(function (el) {
-      return el.classList && el.classList.contains('LoginManager')
-    })
+    return !event.target.closest('.LoginManager')
   }
 
   _setContainerElement = (el) => {
@@ -133,8 +132,9 @@ class DropTarget extends React.Component {
   }
 
   _unsetContainerElement = () => {
+    const dropZone = this.state.dropZone
     this.state.targetContainer && this.state.targetContainer.classList.remove(config.classes.isTargetContainer)
-    this.state.dropZone && this.state.dropZone.parentElement.removeChild(this.state.dropZone)
+    dropZone && dropZone.parentElement && dropZone.parentElement.removeChild(dropZone)
     this.setState(() => ({
       targetContainer: undefined,
       dropZone: undefined
