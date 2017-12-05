@@ -3,8 +3,8 @@ import config from '../configuration'
 
 class DropTarget extends React.Component {
   state = {
-    isTargetingEnabled: false,
-    targetContainer: undefined,
+    targetingState: config.TARGETING_STATE.off,
+    targetElement: undefined,
     dropZone: undefined
   }
 
@@ -17,35 +17,59 @@ class DropTarget extends React.Component {
   }
 
   render() {
+    // this needs some serious UI work
+
+    let buttonLabel
+    switch (this.state.targetingState) {
+      case (config.TARGETING_STATE.off):
+        buttonLabel = 'Insert before a chosen element'
+        break
+      case (config.TARGETING_STATE.before):
+        buttonLabel = 'Insert after a chosen element'
+        break
+      default:
+        buttonLabel = 'Cancel'
+    }
+
     return (
       <div className="DropTarget">
         <button
           className={config.classes.toggleButton}
-          onClick={this.handleToggleTargeting}>{this.state.isTargetingEnabled ? "Disable" : "Enable"} drop target</button>
+          onClick={this.handleToggleTargeting}>{buttonLabel}</button>
       </div>
     )
   }
 
+  _generateNextTargetingState = (currentState) => {
+    switch (currentState) {
+      case config.TARGETING_STATE.off:
+        return config.TARGETING_STATE.before
+      case config.TARGETING_STATE.before:
+        return config.TARGETING_STATE.after
+      default:
+        return config.TARGETING_STATE.off
+    }
+  }
+
   handleToggleTargeting = () => {
-    var newIsTargetingEnabled = !this.state.isTargetingEnabled
+    var newTargetingState = this._generateNextTargetingState(this.state.targetingState)
 
     this.setState(() => ({
-      isTargetingEnabled: newIsTargetingEnabled,
+      targetingState: newTargetingState,
     }))
 
-    if (!newIsTargetingEnabled) {
-      // turn off targeting
+    if (newTargetingState === config.TARGETING_STATE.off) {
       this._unsetContainerElement()
     }
   }
 
   handleMouseover = (e) => {
-    if (!this.state.isTargetingEnabled) {
+    if (this.state.targetingState === config.TARGETING_STATE.off) {
       return
     }
 
     if (e.target.classList.contains(config.classes.dropZone)
-      || e.target === this.state.targetContainer) {
+      || e.target === this.state.targetElement) {
       // This doesn't count as a change for our purposes.
       return
     }
@@ -61,7 +85,7 @@ class DropTarget extends React.Component {
 
     e.preventDefault()
 
-    if (!this.state.isTargetingEnabled) {
+    if (this.state.targetingState === config.TARGETING_STATE.off) {
       return
     }
 
@@ -74,7 +98,7 @@ class DropTarget extends React.Component {
       // Mission accomplished. Inject the Login Manager and clean up.
       this._insertLoginManager()
       this.setState(() => ({
-        isTargetingEnabled: false,
+        targetingState: config.TARGETING_STATE.off,
       }))
       this._unsetContainerElement()
     }
@@ -114,7 +138,7 @@ class DropTarget extends React.Component {
 
   _setContainerElement = (el) => {
     // remove the class from the previous element and add to the next element
-    this.state.targetContainer && this.state.targetContainer.classList.remove(config.classes.isTargetContainer)
+    this.state.targetElement && this.state.targetElement.classList.remove(config.classes.isTargetContainer)
     el.classList.add(config.classes.isTargetContainer)
 
     const dropZone = this.state.dropZone || (() => {
@@ -126,17 +150,17 @@ class DropTarget extends React.Component {
     el.parentElement.insertBefore(dropZone, el)
 
     this.setState(() => ({
-      targetContainer: el,
+      targetElement: el,
       dropZone: dropZone
     }))
   }
 
   _unsetContainerElement = () => {
     const dropZone = this.state.dropZone
-    this.state.targetContainer && this.state.targetContainer.classList.remove(config.classes.isTargetContainer)
+    this.state.targetElement && this.state.targetElement.classList.remove(config.classes.isTargetContainer)
     dropZone && dropZone.parentElement && dropZone.parentElement.removeChild(dropZone)
     this.setState(() => ({
-      targetContainer: undefined,
+      targetElement: undefined,
       dropZone: undefined
     }))
   }

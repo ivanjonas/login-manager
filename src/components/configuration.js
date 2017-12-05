@@ -8,6 +8,11 @@ let config = {
     isTargetContainer: 'is-targetContainer',
     dropZone: 'DropTarget-dropZone',
     toggleButton: 'DropTarget-toggleButton'
+  },
+  TARGETING_STATE: {
+    off: 'dropstate-off',
+    before: 'dropstate-before',
+    after: 'dropstate-after'
   }
 }
 
