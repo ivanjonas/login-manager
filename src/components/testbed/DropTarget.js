@@ -94,7 +94,7 @@ class DropTarget extends React.Component {
     }
 
     if (e.target.classList.contains(config.classes.dropZone)
-      || e.target.classList.contains(config.classes.isTargetContainer)) {
+      || !!e.target.closest(`.${config.classes.isTargetContainer}`)) {
       // Mission accomplished. Inject the Login Manager and clean up.
       this._insertLoginManager()
       this.setState(() => ({
