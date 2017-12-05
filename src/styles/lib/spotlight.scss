@@ -1,0 +1,72 @@
+.spotlight {
+    position: relative;
+    z-index: 101;
+
+    &::before {
+        z-index: -1;
+        position: absolute;
+        display: block;
+        content: "";
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 0 calc(100vmax + 100vmin) rgba(0,0,0,0.33);
+        border-radius: calc(100vmax + 100vmin);
+        padding: 20px;
+        top: -20px;
+        left: -20px;
+        box-sizing: content-box;
+        pointer-events: none;
+    }
+
+    &::after {
+        pointer-events: none;
+        width: 36em;
+        max-width: 16em;
+        height: auto;
+        background-color: $color-truewhite;
+        display: block;
+        border-radius: 40px;
+        position: absolute;
+        z-index: 1;
+        padding: 10px 30px;
+        box-sizing: content-box;
+        box-sizing: border-box;
+        line-height: 1.5;
+
+        top: 100%;
+        transform: translate(-50%, 25px);
+        left: 50%;
+    }
+
+    &[data-spotlight-text]::after {
+        content: attr(data-spotlight-text);
+    }
+
+    &-text-top-left::after {
+        top: -25px;
+        transform: translateY(-100%);
+        left: -20px;
+    }
+
+    &-text-top-right::after {
+        top: -25px;
+        transform: translateY(-100%);
+        left: initial;
+        right: -20px;
+    }
+
+    &-text-bottom-right::after {
+        top: auto;
+        bottom: -25px;
+        transform: translateY(100%);
+        left: initial;
+        right: -20px;
+    }
+
+    &-text-bottom-left::after {
+        top: auto;
+        bottom: -25px;
+        transform: translateY(100%);
+        left: -20px;
+    }
+}
