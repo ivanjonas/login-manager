@@ -4,8 +4,6 @@
     align-items: center;
     cursor: pointer;
     border-bottom: 2px solid $color-blue-900;
-    max-width: 24em;
-    min-width: 8em;
     transition: background-color $transition-speed linear;
 
     &--hovered {

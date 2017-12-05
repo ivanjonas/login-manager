@@ -2,8 +2,10 @@
     border: 2px solid $color-blue-900;
     border-radius: 4px;
     background-color: $color-background-unfocused;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
+    max-width: 24em;
+    min-width: 8em;
     
     &:hover,
     &:focus-within,
