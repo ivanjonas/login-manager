@@ -23,17 +23,18 @@ class Testbed extends React.Component {
       </div>
       <div>
         <form className="Testbed-form Testbed-form--One">
-          <p>A sweet, sweet app. Holla!</p>
-          <input type="password" name="Testbed-formOnePassword" />
-          <button onClick={handleFakeLogin}>Log me in, dude</button>
+          <p className="Testbed-p">A sweet, sweet app. Holla!</p>
+          <input className="Testbed-input" type="text" name="Testbed-formOneUsername" />
+          <input className="Testbed-input" type="password" name="Testbed-formOnePassword" />
+          <button className="Testbed-button" onClick={handleFakeLogin}>Log me in, dude</button>
         </form>
       </div>
       <div>
         <form className="Testbed-form Testbed-form--Two">
-          <p>Serious app for serious businessman.</p>
-          <input type="text" name="Testbed-formOneUsername" />
-          <input type="password" name="Testbed-formOnePassword" />
-          <button onClick={handleFakeLogin}>I am a professional; log me in with all proper deference.</button>
+          <p className="Testbed-p">Serious app for serious businessman.</p>
+          <input className="Testbed-input" type="text" name="Testbed-formTwoUsername" />
+          <input className="Testbed-input" type="password" name="Testbed-formTwoPassword" />
+          <button className="Testbed-button" onClick={handleFakeLogin}>I am a professional; log me in with all proper deference.</button>
         </form>
       </div>
       <div>

@@ -1,16 +1,11 @@
 import React from 'react'
+import config from '../configuration'
 
 class DropTarget extends React.Component {
   state = {
-    isTargetingEnabled: false,
-    targetContainer: undefined,
+    targetingState: config.TARGETING_STATE.off,
+    targetElement: undefined,
     dropZone: undefined
-  }
-
-  classes = {
-    isTargetContainer: 'is-targetContainer',
-    dropZone: 'DropTarget-dropZone',
-    toggleButton: 'DropTarget-toggleButton'
   }
 
   componentDidMount() {
@@ -18,45 +13,70 @@ class DropTarget extends React.Component {
 
     // because the following event handler is set to trigger during the capture phase and is attached to the document root, there is basically no way that any other event could occur before it.
     document.addEventListener('click', this.handleClickTarget, true)
-    // TODO: add escape key to stop targeting
+    // TODO: add key handler to confirm/stop targeting
   }
 
   render() {
+    // this needs some serious UI work
+
+    let buttonLabel
+    switch (this.state.targetingState) {
+      case (config.TARGETING_STATE.off):
+        buttonLabel = 'Insert before a chosen element'
+        break
+      case (config.TARGETING_STATE.before):
+        buttonLabel = 'Insert after a chosen element'
+        break
+      default:
+        buttonLabel = 'Cancel'
+    }
+
     return (
       <div className="DropTarget">
         <button
-          className={this.classes.toggleButton}
-          onClick={this.handleToggleTargeting}>{this.state.isTargetingEnabled ? "Disable" : "Enable"} drop target</button>
+          className={config.classes.toggleButton}
+          onClick={this.handleToggleTargeting}>{buttonLabel}</button>
       </div>
     )
   }
 
+  _generateNextTargetingState = (currentState) => {
+    switch (currentState) {
+      case config.TARGETING_STATE.off:
+        return config.TARGETING_STATE.before
+      case config.TARGETING_STATE.before:
+        return config.TARGETING_STATE.after
+      default:
+        return config.TARGETING_STATE.off
+    }
+  }
+
   handleToggleTargeting = () => {
-    var newIsTargetingEnabled = !this.state.isTargetingEnabled
+    var newTargetingState = this._generateNextTargetingState(this.state.targetingState)
 
     this.setState(() => ({
-      isTargetingEnabled: newIsTargetingEnabled,
+      targetingState: newTargetingState,
     }))
 
-    if (!newIsTargetingEnabled) {
+    if (newTargetingState === config.TARGETING_STATE.off) {
       this._unsetContainerElement()
     }
   }
 
   handleMouseover = (e) => {
-    if (!this.state.isTargetingEnabled) {
+    if (this.state.targetingState === config.TARGETING_STATE.off) {
       return
     }
 
-    if (e.target.classList.contains(this.classes.dropZone)
-      || e.target === this.state.targetContainer) {
+    if (e.target.classList.contains(config.classes.dropZone)
+      || e.target === this.state.targetElement) {
       // This doesn't count as a change for our purposes.
       return
     }
 
     // e.fromElement doesn't always point to the last-highlighted element
     if (this._isElementEligibleForDropTarget(e)) {
-      this._setContainerElement(e.toElement)
+      this._setContainerElement(e.target)
     }
   }
 
@@ -65,20 +85,20 @@ class DropTarget extends React.Component {
 
     e.preventDefault()
 
-    if (!this.state.isTargetingEnabled) {
+    if (this.state.targetingState === config.TARGETING_STATE.off) {
       return
     }
 
-    if (e.target.classList.contains(this.classes.toggleButton)) {
+    if (e.target.classList.contains(config.classes.toggleButton)) {
       return
     }
 
-    if (e.target.classList.contains(this.classes.dropZone)
-      || e.target.classList.contains(this.classes.isTargetContainer)) {
+    if (e.target.classList.contains(config.classes.dropZone)
+      || e.target.classList.contains(config.classes.isTargetContainer)) {
       // Mission accomplished. Inject the Login Manager and clean up.
       this._insertLoginManager()
       this.setState(() => ({
-        isTargetingEnabled: false,
+        targetingState: config.TARGETING_STATE.off,
       }))
       this._unsetContainerElement()
     }
@@ -108,40 +128,40 @@ class DropTarget extends React.Component {
     /// event: a mouseover event over the element in question
 
     if (['grid', 'inline-grid'].includes(window.getComputedStyle(event.target.parentElement).display)
-      || event.target.classList.contains(this.classes.toggleButton)) {
+      || event.target.classList.contains(config.classes.toggleButton)) {
       // avoid injecting elements inside grids. This can cause infinite feedback loops and maybe cause a seizure. Can't have that.
       return false
     }
 
-    return !event.path.some(function (el) {
-      return el.classList && el.classList.contains('LoginManager')
-    })
+    return !event.target.closest('.LoginManager')
   }
 
   _setContainerElement = (el) => {
     // remove the class from the previous element and add to the next element
-    this.state.targetContainer && this.state.targetContainer.classList.remove(this.classes.isTargetContainer)
-    el.classList.add(this.classes.isTargetContainer)
+    this.state.targetElement && this.state.targetElement.classList.remove(config.classes.isTargetContainer)
+    el.classList.add(config.classes.isTargetContainer)
 
+    const beforeElement = this.state.targetingState === config.TARGETING_STATE.before ? el : el.nextElementSibling
     const dropZone = this.state.dropZone || (() => {
       const bob = document.createElement("div")
-      bob.classList.add(this.classes.dropZone)
+      bob.classList.add(config.classes.dropZone)
       bob.textContent = "Drop Zone"
       return bob
     })()
-    el.parentElement.insertBefore(dropZone, el)
+    el.parentElement.insertBefore(dropZone, beforeElement)
 
     this.setState(() => ({
-      targetContainer: el,
+      targetElement: el,
       dropZone: dropZone
     }))
   }
 
   _unsetContainerElement = () => {
-    this.state.targetContainer && this.state.targetContainer.classList.remove(this.classes.isTargetContainer)
-    this.state.dropZone && this.state.dropZone.parentElement.removeChild(this.state.dropZone)
+    const dropZone = this.state.dropZone
+    this.state.targetElement && this.state.targetElement.classList.remove(config.classes.isTargetContainer)
+    dropZone && dropZone.parentElement && dropZone.parentElement.removeChild(dropZone)
     this.setState(() => ({
-      targetContainer: undefined,
+      targetElement: undefined,
       dropZone: undefined
     }))
   }
