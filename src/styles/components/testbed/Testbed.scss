@@ -27,7 +27,7 @@
 
 .Testbed-swatches {
     display: grid;
-    grid-template: repeat(5, 100px) / repeat(5, 100px);
+    grid-template: repeat(6, 100px) / repeat(5, 100px);
     grid-column: 1 / 4;
 }
 
@@ -110,3 +110,20 @@ background-color: $color-blue-700;
 .color-blue-900 {
 background-color: $color-blue-900;
 }
+
+.color-purple-100 {
+background-color: $color-purple-100;
+}
+.color-purple-300 {
+background-color: $color-purple-300;
+}
+.color-purple-500 {
+background-color: $color-purple-500;
+}
+.color-purple-700 {
+background-color: $color-purple-700;
+}
+.color-purple-900 {
+background-color: $color-purple-900;
+}
+

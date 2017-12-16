@@ -9,6 +9,8 @@ $color-orange-500: hsla(32%, 82%, 49%, 1);
 $color-yellow-500: hsla(58%, 82%, 43%, 1);
 $color-green-500: hsla(153%, 84%, 38%, 1);
 $color-blue-500: hsla(194%, 57%, 37%, 1);
+$color-purple-500: hsla(277%, 100%, 33%, 1);
+
 
 $color-red-100: lighten($color-red-500, $variation * 2);
 $color-red-300: lighten($color-red-500, $variation);
@@ -34,6 +36,11 @@ $color-blue-100: lighten($color-blue-500, $variation * 2);
 $color-blue-300: lighten($color-blue-500, $variation);
 $color-blue-700: darken($color-blue-500, $variation / 2);
 $color-blue-900: darken($color-blue-500, $variation);
+
+$color-purple-100: lighten($color-purple-500, $variation * 2);
+$color-purple-300: lighten($color-purple-500, $variation);
+$color-purple-700: darken($color-purple-500, $variation / 2);
+$color-purple-900: darken($color-purple-500, $variation);
 
 //
 

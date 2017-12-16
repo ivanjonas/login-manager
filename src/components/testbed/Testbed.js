@@ -3,7 +3,7 @@ import LoginManager from '../LoginManager'
 import DropTarget from './DropTarget'
 
 class Testbed extends React.Component {
-  colors = ['red', 'orange', 'yellow', 'green', 'blue']
+  colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
 
   generateColorDivs = function* () {
     for (let i = 0; i < this.colors.length; i++) {
