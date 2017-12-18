@@ -2,48 +2,63 @@ import config from './configuration'
 import React from 'react'
 import Logins from './Logins'
 import Actions from './Actions'
+import Toolbar from './Toolbar'
 
 // Represents the entire LoginManager application
 
 export default class LoginManager extends React.Component {
   state = {
-    logins: undefined
+    logins: undefined,
+    isNeverBeenActivated: true
   }
 
   componentWillMount() {
-    let json
-    const data = window.localStorage.getItem(config.storageKeys.data)
+    let logins
+    let isNeverBeenActivated = this._loadFromStorage(config.storageKeys.neverUsed)
+    const data = this._loadFromStorage(config.storageKeys.data)
 
     try {
-      json = data ? JSON.parse(data) : []
+      logins = data ? JSON.parse(data) : []
     } catch (error) {
       console.error('Login Manager could not load data from window.localStorage.')
     }
 
-    this.setState(() => ({
-      logins: json
-    }))
+    isNeverBeenActivated = isNeverBeenActivated === null ? true : JSON.parse(isNeverBeenActivated)
+
+    this.setState(() => ({ logins, isNeverBeenActivated }))
   }
 
   componentDidUpdate(prevProps, prevState) {
     const data = JSON.stringify(this.state.logins)
 
-    if (JSON.stringify(prevState.logins) === data) return
+    if (!JSON.stringify(prevState.logins) === data) {
+      this._saveToStorage(config.storageKeys.data, data)
+    }
 
-    this._saveState(config.storageKeys.data, data)
+    if (prevState.isNeverBeenActivated && !this.state.isNeverBeenActivated) {
+      this._saveToStorage(config.storageKeys.neverUsed, this.state.isNeverBeenActivated)
+    }
   }
 
   render() {
     return (
-      <div className="LoginManager">
-        <Logins
-          logins={this.state.logins}
-          handleEditLogin={this.handleEditLogin}
-          handleDelete={this.handleDeleteLogin}
-        />
-        <Actions
-          handleCreateLogin={this.handleCreateLogin}
-        />
+      <div>
+        <div className="LoginManager">
+          <Logins
+            logins={this.state.logins}
+            handleEditLogin={this.handleEditLogin}
+            handleDelete={this.handleDeleteLogin}
+          />
+          <Actions
+            handleCreateLogin={this.handleCreateLogin}
+            showDropTarget={!this.state.isNeverBeenActivated}
+          />
+        </div>
+
+        {this.state.isNeverBeenActivated && <Toolbar
+          handleFirstActivation={this.handleFirstActivation}
+          isUnderSpotlight={this.state.isNeverBeenActivated}
+        />}
       </div>
     )
   }
@@ -89,7 +104,7 @@ export default class LoginManager extends React.Component {
       logins: prevState.logins.map((login) => {
         if ((login.username === editedLogin.username)
           && login.password === editedLogin.password) {
-            return replacementLogin
+          return replacementLogin
         } else {
           return login
         }
@@ -99,8 +114,18 @@ export default class LoginManager extends React.Component {
     return true
   }
 
-  _saveState(key, data) {
+  handleFirstActivation = () => {
+    this.setState(() => ({
+      isNeverBeenActivated: false
+    }))
+  }
+
+  _saveToStorage(key, data) {
     window.localStorage.setItem(key, data)
+  }
+
+  _loadFromStorage(key) {
+    return window.localStorage.getItem(key)
   }
 
   _findLogin = (loginToFind) => {

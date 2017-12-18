@@ -33,7 +33,7 @@ class DropTarget extends React.Component {
     return (
       <div className="DropTarget">
         <button
-          className={config.classes.toggleButton}
+          className={`${config.classes.toggleButton} Button Button--alwaysColored Button--large`} 
           onClick={this.handleToggleTargeting}>{buttonLabel}</button>
       </div>
     )
@@ -52,6 +52,7 @@ class DropTarget extends React.Component {
 
   handleToggleTargeting = () => {
     var newTargetingState = this._generateNextTargetingState(this.state.targetingState)
+    this.props.handleFirstActivation()
 
     this.setState(() => ({
       targetingState: newTargetingState,

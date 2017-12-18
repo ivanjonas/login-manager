@@ -2,7 +2,8 @@ const keyPrefix = 'LoginManager-'
 
 let config = {
   storageKeys: {
-    data: `${keyPrefix}data`
+    data: `${keyPrefix}data`,
+    neverUsed: `${keyPrefix}-neverUsed` // TODO ideally the prefix is injected automatically for us
   },
   classes: {
     isTargetContainer: 'is-targetContainer',

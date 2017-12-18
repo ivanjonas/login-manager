@@ -1,27 +1,26 @@
 .Button {
     cursor: pointer;
     border-radius: 3px;
-    background-color: $color-background-unfocused;
+    background-color: transparent;
     color: $color-black;
     border: 3px solid $color-black;
     @include transitions(color border-color background-color);
     font-weight: bold;
-}
 
-.LoginManager:hover,
-.LoginManager:focus-within,
-.ReactModalPortal, // by definition, modals always have focus
-.is-application-focused {
-    .Button {
+    &--large {
+        font-size: 1.4em;
+    }
+
+    .LoginManager:hover &,
+    .LoginManager:focus-within &,
+    .ReactModalPortal &, // by definition, modals always have focus
+    .is-application-focused &,
+    &--alwaysColored {
         color: $color-blue-900;
         border-color: $color-blue-500;
     
         &:hover {
             background-color: $color-blue-100;
-        }
-    
-        &--large {
-            font-size: 1.4em;
         }
     
         &--green {

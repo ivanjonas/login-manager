@@ -1,6 +1,7 @@
 import React from 'react'
 import LoginManager from '../LoginManager'
 import DropTarget from './DropTarget'
+import config from '../configuration'
 
 class Testbed extends React.Component {
   colors = ['red', 'orange', 'yellow', 'green', 'blue']
@@ -26,7 +27,7 @@ class Testbed extends React.Component {
           <p className="Testbed-p">A sweet, sweet app. Holla!</p>
           <input className="Testbed-input" type="text" name="Testbed-formOneUsername" />
           <input className="Testbed-input" type="password" name="Testbed-formOnePassword" />
-          <button className="Testbed-button" onClick={handleFakeLogin}>Log me in, dude</button>
+          <button className="Testbed-button" onClick={this.handleFakeLogin}>Log me in, dude</button>
         </form>
       </div>
       <div>
@@ -34,23 +35,27 @@ class Testbed extends React.Component {
           <p className="Testbed-p">Serious app for serious businessman.</p>
           <input className="Testbed-input" type="text" name="Testbed-formTwoUsername" />
           <input className="Testbed-input" type="password" name="Testbed-formTwoPassword" />
-          <button className="Testbed-button" onClick={handleFakeLogin}>I am a professional; log me in with all proper deference.</button>
+          <button className="Testbed-button" onClick={this.handleFakeLogin}>I am a professional; log me in with all proper deference.</button>
         </form>
-      </div>
-      <div>
-        <DropTarget />
       </div>
       <div className="Testbed-swatches">
         {[...this.generateColorDivs()]}
       </div>
+      <button onClick={this.handleNeverUsed}>Reset never-used</button>
     </div>
   }
-}
 
-const handleFakeLogin = (e) => {
-  console.warn('Fake login button was clicked')
+  handleFakeLogin = (e) => {
+    console.warn('Fake login button was clicked')
 
-  e.preventDefault()
+    e.preventDefault()
+  }
+
+  handleNeverUsed = (e) => {
+    e.preventDefault()
+    window.localStorage.removeItem(config.storageKeys.neverUsed)
+    window.location = window.location
+  }
 }
 
 export default Testbed
