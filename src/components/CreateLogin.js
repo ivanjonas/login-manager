@@ -15,7 +15,7 @@ export default class CreateLogin extends React.Component {
         onClick={this.handleOpenModal}
       >
         Add a Login
-          <Modal
+        <Modal
           isOpen={this.state.isCreateLoginModalOpen}
           contentLabel="Modal to Create a New Login"
           onAfterOpen={() => {
@@ -25,12 +25,16 @@ export default class CreateLogin extends React.Component {
           shouldCloseOnOverlayClick={true}
           className="js-createLoginModal"
         >
-          <form onSubmit={this.handleCreateLogin}>
+          <form
+            onSubmit={this.handleCreateLogin}
+            spellCheck="false"
+            autoComplete="off"
+          >
             <input
               className="Modal-input Modal-input--large"
               type="text"
               name="username"
-              spellcheck="false"
+              spellCheck="false"
             />
             <input
               className="Modal-input Modal-input--large"
@@ -38,7 +42,10 @@ export default class CreateLogin extends React.Component {
               name="password"
             />
             <input
-              className="Modal-button Button Button--green Button--large" type="submit" value="Create" />
+              className="Modal-button Button Button--green Button--large"
+              type="submit"
+              value="Create"
+            />
             {this.state.createLoginModalErrorMessage && <p className="Feedback Feedback--info">{this.state.createLoginModalErrorMessage}</p>}
           </form>
         </Modal>

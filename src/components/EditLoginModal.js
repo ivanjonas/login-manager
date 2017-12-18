@@ -15,17 +15,20 @@ const EditLoginModal = (props) => {
       closeTimeoutMS={250}
       className="js-editLoginModal"
     >
-      <form onSubmit={props.handleSubmitEdit}>
+      <form
+        onSubmit={props.handleSubmitEdit}
+        spellCheck="false"
+        autoComplete="off"
+      >
         <input
           className="Modal-input Modal-input--large js-focus"
           type="text"
           name="newUsername"
           defaultValue={props.editingLogin.username}
-          spellcheck="false"
         />
         <input
           className="Modal-input Modal-input--large"
-          type="password"
+          type="text"
           name="newPassword"
           defaultValue={props.editingLogin.password}
         />
