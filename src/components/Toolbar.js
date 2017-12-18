@@ -1,5 +1,5 @@
 import React from 'react'
-import DropTarget from './testbed/DropTarget'
+import DropTarget from './DropTarget'
 
 export default class Toolbar extends React.Component {
   render() {

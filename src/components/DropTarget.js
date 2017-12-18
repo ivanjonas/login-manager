@@ -1,5 +1,5 @@
 import React from 'react'
-import config from '../configuration'
+import config from './configuration'
 
 class DropTarget extends React.Component {
   state = {

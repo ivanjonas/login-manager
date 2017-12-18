@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginManager from '../LoginManager'
-import DropTarget from './DropTarget'
+import DropTarget from '../DropTarget'
 import config from '../configuration'
 
 class Testbed extends React.Component {

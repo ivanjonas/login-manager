@@ -1,6 +1,6 @@
 import React from 'react'
 import CreateLogin from './CreateLogin'
-import DropTarget from './testbed/DropTarget'
+import DropTarget from './DropTarget'
 
 export default class Actions extends React.Component {
   render() {
