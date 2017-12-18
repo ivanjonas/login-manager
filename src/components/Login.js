@@ -7,6 +7,7 @@ export default class Login extends React.Component {
     return (
       <div
         className="Login"
+        title={this.props.login.password}
         onMouseOver={(e) => {
           (e.target === e.currentTarget) && e.target.classList.add('Login--hovered')
         }}
@@ -14,7 +15,6 @@ export default class Login extends React.Component {
       >
         <span
           className="Login-username"
-          title={this.props.login.password}
         >
           {this.props.login.username}
         </span>
