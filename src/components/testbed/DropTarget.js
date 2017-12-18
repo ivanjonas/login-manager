@@ -11,8 +11,7 @@ class DropTarget extends React.Component {
   componentDidMount() {
     document.addEventListener('mouseover', this.handleMouseover)
 
-    // because the following event handler is set to trigger during the capture phase and is attached to the document root, there is basically no way that any other event could occur before it.
-    document.addEventListener('click', this.handleClickTarget, true)
+    document.getElementById('app').addEventListener('click', this.handleClickTarget, true)
     // TODO: add key handler to confirm/stop targeting
   }
 
