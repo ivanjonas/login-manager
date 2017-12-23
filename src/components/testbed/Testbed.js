@@ -42,6 +42,27 @@ class Testbed extends React.Component {
         {[...this.generateColorDivs()]}
       </div>
       <button onClick={this.handleNeverUsed}>Reset never-used</button>
+      <div id="Testbed-uniqueElementIdentification">
+        <div className="Testbed-dupeClass">duplicate classes</div>
+        <div className="Testbed-dupeClass">duplicate classes</div>
+        <div className="Testbed-uniqueClass">unique class</div>
+        <div>plain div</div>
+        <div id="Testbed-uniqueParent">
+          parent
+          <div>plain child of unique parent</div>
+        </div>
+        <div id="Testbed-dupeId">duplicate IDs (might break things)</div>
+        <div id="Testbed-dupeId">duplicate IDs (might break things)</div>
+        <div>
+          <div>
+            <div>deep nested plain child</div>
+          </div>
+        </div>
+        <div data-testbed-unique="unique value"></div>
+        <div data-testbed-dupe="duplicate values">dupe attribute</div>
+        <div data-testbed-dupe="duplicate values">dupe attribute</div>
+        <div data-testbed-boolattr>attribute without value</div>
+      </div>
     </div>
   }
 

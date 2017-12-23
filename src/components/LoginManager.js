@@ -9,7 +9,8 @@ import Toolbar from './Toolbar'
 export default class LoginManager extends React.Component {
   state = {
     logins: undefined,
-    isNeverBeenActivated: true
+    isNeverBeenActivated: true,
+    savedLocation: undefined
   }
 
   componentWillMount() {
